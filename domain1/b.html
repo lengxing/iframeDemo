@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>我是B域</title>
+</head>
+
+<body>
+  <p id="app">b</p>
+  <button id="" onclick="jump()">点击跳转</button>
+  <script>
+    document.domain = 'jiangqi.cn';
+    window.data = '传送的数据：1111';
+
+    var obj = parent.document.getElementsByTagName('p')[0]
+    obj.innerText = "我把A改成了B"
+
+    function jump() {
+      // window.location.href = '/c.html'
+      // debugger
+      parent.location.href = '/c.html'
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>我是A</title>
+</head>
+<p id="app2">我是a</p>
+
+<body>
+  <script>
+    document.domain = 'jiangqi.cn';
+    let ifrObj = document.createElement('iframe');
+    ifrObj.src = 'http://top.jiangqi.cn:1026/b.html';
+    //ifrObj.style.display = 'none';
+    document.body.appendChild(ifrObj);
+    ifrObj.onload = function () {
+      //=========================================一、分割线（跨域实践）================================================================================
+      let ifrWin1 = ifrObj.contentWindow;
+      alert(ifrWin1.data)
+      //1、直接获得iframe的window对象之后，获取iframe传过来的data
+      //=========================================二、分割线（iframe对象的contentWindow属性）===========================================================      
+      //1、通过iframe对象的contentWindow（非标准属性；只读；大多浏览器都支持），返回指定的iframe的窗口对象
+      let ifrWin2 = ifrObj.contentWindow;
+      //2、给指定iframe对象的window对象传递参数（父子页面传参）
+      ifrWin2.username = '张三'
+      //3、直接获取iframe页面内的元素并操作dom元素
+      var obj = ifrWin2.document.getElementsByTagName('p')[0].innerText = "22";
+      //4、在子iframe里可以通过window.parent或者window.top访问父级页面的dom
+      //=========================================三、分割线（iframe对象的contentDocument属性）=========================================================
+      //1、直接获取iframe页面内的元素并操作dom元素。
+      let ifrDoc = ifrObj.contentDocument;
+      ifrDoc.getElementsByTagName('p')[0].innerText = "33"
+    }
+  </script>
+</body>
+
+</html>
